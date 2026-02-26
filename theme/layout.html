@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{PAGE_TITLE}}</title>
+    <link rel="stylesheet" href="/theme/styles/tokens.css" />
+    <link rel="stylesheet" href="/theme/styles/typography.css" />
+    <link rel="stylesheet" href="/theme/styles/layout.css" />
+  </head>
+  <body data-handbook="{{HANDBOOK_ID}}">
+    <a class="eh-skip-link" href="#eh-main">Skip to content</a>
+
+    <div class="eh-app">
+      <header class="eh-header" data-eh-header>
+        {{HEADER_HTML}}
+      </header>
+
+      <button
+        class="eh-sidebar-overlay"
+        type="button"
+        data-sidebar-overlay
+        aria-label="Close navigation"
+      ></button>
+
+      <aside class="eh-sidebar" id="eh-sidebar" data-sidebar aria-label="Handbook navigation">
+        {{SIDEBAR_HTML}}
+      </aside>
+
+      <main class="eh-main" id="eh-main" data-main>
+        {{DOCUMENT_HTML}}
+      </main>
+
+      <nav class="eh-mobile-nav" data-mobile-nav aria-label="Mobile navigation">
+        <button type="button" data-action="menu">Menu</button>
+        <button type="button" data-action="search">Search</button>
+        <button type="button" data-action="domains">Domains</button>
+        <button type="button" data-action="recent">Recent</button>
+      </nav>
+    </div>
+
+    <script defer src="/theme/js/mobile-nav.js"></script>
+    <script defer src="/theme/js/toc.js"></script>
+    <script defer src="/theme/js/recents.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+:root {
+  color-scheme: light;
+
+  --eh-color-bg: #f3f6fa;
+  --eh-color-bg-alt: #e8eef5;
+  --eh-color-surface: #ffffff;
+  --eh-color-surface-muted: #f7f9fc;
+  --eh-color-border: #c7d1dd;
+  --eh-color-border-strong: #95a6b8;
+  --eh-color-text: #0f1f2f;
+  --eh-color-text-muted: #32485d;
+  --eh-color-accent: #0f6f5d;
+  --eh-color-accent-strong: #0a5648;
+  --eh-color-accent-soft: #d9efe9;
+  --eh-color-focus: #145fc0;
+  --eh-color-danger: #a3283a;
+
+  --eh-shadow-1: 0 8px 24px rgba(7, 18, 34, 0.08);
+  --eh-shadow-2: 0 16px 38px rgba(7, 18, 34, 0.12);
+
+  --eh-radius-sm: 8px;
+  --eh-radius-md: 12px;
+  --eh-radius-lg: 18px;
+
+  --eh-space-1: 4px;
+  --eh-space-2: 8px;
+  --eh-space-3: 12px;
+  --eh-space-4: 16px;
+  --eh-space-5: 20px;
+  --eh-space-6: 24px;
+  --eh-space-8: 32px;
+  --eh-space-10: 40px;
+
+  --eh-font-body: "Atkinson Hyperlegible Next", "Avenir Next", "Segoe UI", sans-serif;
+  --eh-font-heading: "DM Serif Display", "Fraunces", Georgia, serif;
+  --eh-font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --eh-font-size-xs: 0.8125rem;
+  --eh-font-size-sm: 0.9375rem;
+  --eh-font-size-md: 1rem;
+  --eh-font-size-lg: 1.125rem;
+  --eh-font-size-xl: 1.25rem;
+  --eh-font-size-2xl: 1.5rem;
+  --eh-font-size-3xl: 1.875rem;
+  --eh-font-size-4xl: 2.25rem;
+
+  --eh-line-tight: 1.25;
+  --eh-line-normal: 1.5;
+  --eh-line-relaxed: 1.65;
+
+  --eh-sidebar-width: 320px;
+  --eh-right-rail-width: 300px;
+  --eh-reader-max: 78ch;
+  --eh-touch-target: 48px;
+}

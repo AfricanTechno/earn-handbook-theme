@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--eh-font-body);
+  font-size: 17px;
+  line-height: var(--eh-line-normal);
+  color: var(--eh-color-text);
+  background: linear-gradient(170deg, var(--eh-color-bg), var(--eh-color-bg-alt));
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--eh-font-heading);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--eh-color-text);
+}
+
+h1 {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre,
+table {
+  margin: 0 0 var(--eh-space-4);
+}
+
+a {
+  color: var(--eh-color-accent-strong);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--eh-color-accent);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--eh-font-mono);
+}
+
+.eh-doc-content {
+  font-size: 1.0625rem;
+  line-height: var(--eh-line-relaxed);
+}
+
+.eh-doc-content > :first-child {
+  margin-top: 0;
+}
+
+.eh-doc-content > :last-child {
+  margin-bottom: 0;
+}
+
+.eh-doc-content p,
+.eh-doc-content ul,
+.eh-doc-content ol,
+.eh-doc-content pre,
+.eh-doc-content blockquote,
+.eh-doc-content table {
+  max-width: var(--eh-reader-max);
+}
+
+.eh-doc-content h1,
+.eh-doc-content h2,
+.eh-doc-content h3,
+.eh-doc-content h4 {
+  margin: var(--eh-space-6) 0 var(--eh-space-3);
+  scroll-margin-top: 90px;
+}
+
+.eh-doc-content ul,
+.eh-doc-content ol {
+  padding-left: 1.3em;
+}
+
+.eh-doc-content li + li {
+  margin-top: var(--eh-space-2);
+}
+
+.eh-doc-content blockquote {
+  border-left: 4px solid var(--eh-color-border-strong);
+  padding-left: var(--eh-space-4);
+  color: var(--eh-color-text-muted);
+}
+
+.eh-doc-content pre {
+  overflow-x: auto;
+  border: 1px solid var(--eh-color-border);
+  border-radius: var(--eh-radius-sm);
+  background: var(--eh-color-surface-muted);
+  padding: var(--eh-space-4);
+}
+
+.eh-doc-content table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  font-size: 0.95em;
+}
+
+.eh-doc-content th,
+.eh-doc-content td {
+  text-align: left;
+  border: 1px solid var(--eh-color-border);
+  padding: var(--eh-space-2) var(--eh-space-3);
+}

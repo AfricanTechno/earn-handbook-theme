@@ -1,0 +1,37 @@
+<div class="eh-header-inner">
+  <button
+    type="button"
+    class="eh-menu-btn"
+    data-mobile-menu-toggle
+    aria-controls="eh-sidebar"
+    aria-expanded="false"
+  >
+    Menu
+  </button>
+
+  <div class="eh-brand">
+    <p class="eh-brand-eyebrow">{{HANDBOOK_PARENT_LABEL}}</p>
+    <a class="eh-brand-title" href="{{HANDBOOK_HOME_URL}}">{{HANDBOOK_NAME}}</a>
+    <p class="eh-brand-subtitle">{{HANDBOOK_SUBTITLE}}</p>
+  </div>
+
+  <form class="eh-search" role="search" action="{{SEARCH_ACTION}}" method="get">
+    <label for="eh-search-input">Search handbook</label>
+    <div class="eh-search-row">
+      <input
+        id="eh-search-input"
+        data-search-input
+        type="search"
+        name="q"
+        placeholder="Search policies, controls, operations"
+        autocomplete="off"
+      />
+      <button type="submit">Go</button>
+    </div>
+  </form>
+
+  <div class="eh-header-actions">
+    <a class="eh-action-link" href="{{GROUP_HANDBOOK_URL}}">Open in Group Handbook</a>
+    <a class="eh-action-link" href="/cdn-cgi/access/logout">Logout</a>
+  </div>
+</div>

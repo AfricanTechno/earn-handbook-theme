@@ -1,0 +1,35 @@
+<section class="eh-document" data-document>
+  {{BREADCRUMBS_HTML}}
+  {{DOC_SUMMARY_HTML}}
+
+  <div class="eh-doc-grid">
+    <article class="eh-doc-content" data-doc-content>
+      {{DOC_HTML}}
+    </article>
+
+    <aside class="eh-right-rail" aria-label="On this page and supporting links">
+      <section class="eh-rail-card eh-toc-card">
+        <div class="eh-rail-head">
+          <h2>On this page</h2>
+          <button type="button" class="eh-rail-toggle" data-toc-toggle aria-expanded="true">Hide</button>
+        </div>
+        <nav class="eh-toc" data-toc aria-label="Table of contents">
+          <ol class="eh-toc-list" data-toc-list></ol>
+        </nav>
+      </section>
+
+      <section class="eh-rail-card">
+        <h2>Related pages</h2>
+        <ul class="eh-rail-links" data-related-list></ul>
+      </section>
+
+      <section class="eh-rail-card" data-recents-panel>
+        <div class="eh-rail-head">
+          <h2>Recently viewed</h2>
+          <button type="button" class="eh-ghost-btn" data-recents-clear>Clear</button>
+        </div>
+        <ul class="eh-rail-links" data-recents-list></ul>
+      </section>
+    </aside>
+  </div>
+</section>
