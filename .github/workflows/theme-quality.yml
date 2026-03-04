@@ -1,0 +1,30 @@
+name: Theme Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate theme structure
+        run: bash scripts/validate-theme.sh
+
+      - name: Verify clean working tree
+        run: |
+          if [[ -n "$(git status --short)" ]]; then
+            git status --short
+            git diff --stat || true
+            exit 1
+          fi
