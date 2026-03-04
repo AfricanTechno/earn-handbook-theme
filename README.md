@@ -1,8 +1,25 @@
 # earn-handbook-theme
 
-Shared theme assets for EARN markdown-driven handbook sites.
+Shared UI assets for EARN markdown-driven handbook sites.
 
-## Folder Structure
+This repo contains only reusable theme files:
+
+- layout templates
+- HTML component partials
+- design tokens and typography
+- layout CSS
+- minimal progressive-enhancement JS
+
+## Current Consumers
+
+- `earnOS`
+- `atOS`
+- `agOS`
+- `aghOS`
+- `alpOS`
+- `ebsOS`
+
+## Repo Structure
 
 ```text
 earn-handbook-theme/
@@ -25,27 +42,92 @@ earn-handbook-theme/
   README.md
 ```
 
-## Quick Start
+## Preferred Integration
 
-1. Copy this repository into each consumer repo at `web/theme/`.
-2. In the consumer page shell, include:
+Consumer repos should mount this repo as a git submodule at:
+
+```text
+web/theme/
+```
+
+Example:
+
+```bash
+git submodule add git@github.com:AfricanTechno/earn-handbook-theme.git web/theme
+git submodule update --init --recursive
+```
+
+If a consumer repo already exists:
+
+```bash
+git submodule sync -- web/theme
+git submodule update --init --recursive
+```
+
+## Consumer Requirements
+
+Each consumer repo should provide:
+
+- `web/theme/` mounted from this repo
+- `web/handbook.config.json`
+- `web/public/overrides.css`
+- a local shell file such as `web/public/index.html`
+- build output wiring that copies `web/theme` into the published static output
+- local preview wiring that serves `/theme/*` from `web/theme`
+
+Recommended branding/config payload:
+
+```json
+{
+  "handbook_title": "AT Handbook",
+  "entity_code": "AT",
+  "home_url": "/"
+}
+```
+
+## Required Asset Includes
+
+Consumer templates must include:
 
 ```html
 <link rel="stylesheet" href="/theme/styles/tokens.css" />
 <link rel="stylesheet" href="/theme/styles/typography.css" />
 <link rel="stylesheet" href="/theme/styles/layout.css" />
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/overrides.css" />
+
 <script defer src="/theme/js/mobile-nav.js"></script>
 <script defer src="/theme/js/toc.js"></script>
 <script defer src="/theme/js/recents.js"></script>
 ```
 
-3. Render `theme/layout.html` as the outer shell.
-4. Render `theme/document.html` inside `{{DOCUMENT_HTML}}`.
-5. Fill component placeholders using your existing markdown build output.
+If the consumer repo uses a small branding loader, load that before the main app bundle:
+
+```html
+<script defer src="/brand.js"></script>
+<script type="module" src="/app.js"></script>
+```
+
+## Template Contract
+
+Use:
+
+- `theme/layout.html` as the outer shell
+- `theme/document.html` as the document wrapper
+- `components/*.html` as reusable slot fragments
+
+Expected placeholders:
+
+- `{{HEADER_HTML}}`
+- `{{SIDEBAR_HTML}}`
+- `{{DOCUMENT_HTML}}`
+- `{{BREADCRUMBS_HTML}}`
+- `{{DOC_SUMMARY_HTML}}`
+- `{{DOC_HTML}}`
 
 ## Required Data Hooks
 
-The theme JS utilities require these attributes/ids in rendered HTML:
+The JS utilities depend on these hooks being present:
 
 - Sidebar: `data-sidebar`
 - Sidebar overlay: `data-sidebar-overlay`
@@ -59,37 +141,39 @@ The theme JS utilities require these attributes/ids in rendered HTML:
 - TOC nav: `data-toc`
 - TOC toggle button: `data-toc-toggle`
 - Recents lists: `data-recents-list`
-- Recents clear button (optional): `data-recents-clear`
+- Recents clear button: `data-recents-clear` (optional)
 - Document title node: `data-doc-title`
+- Document purpose node: `data-doc-purpose`
 
-## Consumption Contract
+Do not rename these hooks in consumer markup unless the consumer also replaces the matching JS behavior.
 
-### Required Mount Path
+## Build And Publish Contract
 
-Consumer repos MUST mount the theme at:
+Consumer repos must make `/theme/...` available in both:
+
+- local preview
+- Cloudflare publish output
+
+Recommended publish step:
 
 ```text
-web/theme/
+copy web/theme -> <publish-output>/theme
+copy web/handbook.config.json -> <publish-output>/handbook.config.json
+remove <publish-output>/theme/.git
 ```
 
-This ensures static references like `/theme/styles/layout.css` resolve consistently in Cloudflare deployments.
+Recommended local dev routing:
 
-### Required File Includes
+```text
+/theme/* -> web/theme/*
+/handbook.config.json -> web/handbook.config.json
+```
 
-Consumer templates MUST include all shared CSS and JS files:
+## Safe Overrides
 
-- `/theme/styles/tokens.css`
-- `/theme/styles/typography.css`
-- `/theme/styles/layout.css`
-- `/theme/js/mobile-nav.js`
-- `/theme/js/toc.js`
-- `/theme/js/recents.js`
+Per-repo overrides should be limited to CSS variables and small utility classes in `web/public/overrides.css`.
 
-### Safe Branding Overrides
-
-Per-repo branding overrides are allowed only through CSS variables and optional brand utility classes.
-
-Create a repo-local file after theme CSS, for example `web/public/brand.css`:
+Example:
 
 ```css
 :root {
@@ -100,17 +184,35 @@ Create a repo-local file after theme CSS, for example `web/public/brand.css`:
 }
 ```
 
-Do NOT rename required selectors or data hooks from this theme.
+Do not fork theme files just to change branding.
+
+## Updating Consumers
+
+When this repo changes, update each consumer repo with:
+
+```bash
+git submodule update --remote web/theme
+git add web/theme
+git commit -m "Update shared handbook theme"
+```
+
+If the consumer has pinned submodule changes locally:
+
+```bash
+git -C web/theme fetch origin main
+git -C web/theme checkout origin/main
+```
 
 ## Accessibility Defaults
 
-- High-contrast palette (WCAG AA-safe defaults).
-- Minimum tap target `48px`.
-- Skip link support.
-- Keyboard-visible focus rings.
-- Large reading scale for executive readability.
+- high-contrast baseline palette
+- `48px` minimum touch target
+- keyboard-visible focus states
+- skip-link support
+- large reading scale for executive readability
+- progressive enhancement only
 
 ## Progressive Enhancement
 
-- No JS required for base navigation and reading.
-- JS only enhances TOC highlighting, recents, and mobile drawer controls.
+- base navigation and reading remain usable without JS
+- JS enhances TOC highlighting, recent pages, and mobile drawer behavior
