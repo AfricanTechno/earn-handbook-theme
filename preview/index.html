@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#163c37" />
+    <title>Operational Resilience Review</title>
+    <link rel="stylesheet" href="/theme/styles/tokens.css" />
+    <link rel="stylesheet" href="/theme/styles/typography.css" />
+    <link rel="stylesheet" href="/theme/styles/layout.css" />
+  </head>
+  <body data-handbook="earn-preview">
+    <a class="eh-skip-link" href="#eh-main">Skip to content</a>
+
+    <div class="eh-app">
+      <header class="eh-header" data-eh-header>
+        <div class="eh-header-inner">
+          <div class="eh-header-leading">
+            <button
+              type="button"
+              class="eh-menu-btn"
+              data-mobile-menu-toggle
+              aria-controls="eh-sidebar"
+              aria-expanded="false"
+            >
+              Menu
+            </button>
+
+            <div class="eh-brand">
+              <p class="eh-brand-eyebrow">EARN Group</p>
+              <a class="eh-brand-title" href="/preview/index.html">Operational Handbook</a>
+              <p class="eh-brand-subtitle">Shared governance, delivery, and evidence patterns for every operating entity.</p>
+            </div>
+          </div>
+
+          <form class="eh-search eh-header-panel" role="search" action="/preview/index.html" method="get">
+            <label for="eh-search-input">Search handbook</label>
+            <div class="eh-search-row">
+              <input
+                id="eh-search-input"
+                data-search-input
+                type="search"
+                name="q"
+                placeholder="Search policies, controls, operations"
+                autocomplete="off"
+              />
+              <button type="submit">Go</button>
+            </div>
+          </form>
+
+          <section class="eh-header-actions eh-header-panel" aria-label="Quick actions">
+            <p class="eh-header-actions-label">Quick actions</p>
+            <div class="eh-header-actions-list">
+              <a class="eh-action-link" href="https://example.com/group">Open in Group Handbook</a>
+              <a class="eh-action-link" href="https://example.com/logout">Logout</a>
+            </div>
+          </section>
+        </div>
+      </header>
+
+      <button
+        class="eh-sidebar-overlay"
+        type="button"
+        data-sidebar-overlay
+        aria-label="Close navigation"
+        aria-hidden="true"
+      ></button>
+
+      <aside class="eh-sidebar" id="eh-sidebar" data-sidebar aria-label="Handbook navigation">
+        <section class="eh-sidebar-block" data-domain-nav>
+          <h2>Domains</h2>
+          <nav aria-label="Domain navigation">
+            <ul class="eh-nav-list" data-domain-list>
+              <li><a href="#governance">Governance</a></li>
+              <li><a href="#operations">Operations</a></li>
+              <li><a href="#risk">Risk and control</a></li>
+              <li><a href="#evidence">Evidence management</a></li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="eh-sidebar-block">
+          <h2>All pages</h2>
+          <nav aria-label="All handbook pages">
+            <ul class="eh-nav-list" data-doc-list>
+              <li><a href="/preview/index.html" aria-current="page">Operational Resilience Review</a></li>
+              <li><a href="#cadence">Weekly operational cadence</a></li>
+              <li><a href="#thresholds">Incident thresholds and escalation</a></li>
+              <li><a href="#evidence-pack">Quarterly evidence pack</a></li>
+              <li><a href="#controls">Control coverage and mapping</a></li>
+              <li><a href="#risks">Open risks register</a></li>
+              <li><a href="#owners">Authority and provider owners</a></li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="eh-sidebar-block" data-recents-panel>
+          <h2>Recently viewed</h2>
+          <ul class="eh-nav-list" data-recents-list></ul>
+        </section>
+      </aside>
+
+      <main class="eh-main" id="eh-main" data-main>
+        <section class="eh-document" data-document>
+          <nav class="eh-breadcrumbs" aria-label="Breadcrumb">
+            <ol data-breadcrumbs-list>
+              <li><a href="/preview/index.html">Operational Handbook</a></li>
+              <li><span aria-current="page">Operational Resilience Review</span></li>
+            </ol>
+          </nav>
+
+          <section class="eh-doc-summary" data-doc-summary>
+            <div class="eh-doc-summary-head">
+              <p class="eh-doc-kicker">Handbook entry</p>
+              <h1 class="eh-doc-title" data-doc-title>Operational Resilience Review</h1>
+              <p class="eh-doc-purpose" data-doc-purpose>
+                Defines the monthly review pattern used by entity leaders to verify the health of critical services,
+                decide on escalation, and maintain an evidence trail strong enough for group-level oversight.
+              </p>
+            </div>
+
+            <dl class="eh-meta-grid">
+              <div class="eh-meta-card">
+                <dt>Authority owner</dt>
+                <dd data-doc-owner>Chief Operating Officer</dd>
+              </div>
+              <div class="eh-meta-card">
+                <dt>Provider</dt>
+                <dd data-doc-provider>Operational Excellence Office</dd>
+              </div>
+              <div class="eh-meta-card">
+                <dt>Applicable entities</dt>
+                <dd data-doc-entities>earnOS, atOS, agOS, aghOS, alpOS, ebsOS</dd>
+              </div>
+            </dl>
+          </section>
+
+          <div class="eh-doc-grid">
+            <article class="eh-doc-content" data-doc-content>
+              <p>
+                The monthly resilience review is not a status meeting. It is the decision point where service owners,
+                control owners, and executives confirm whether each critical service remains within acceptable operating
+                limits and whether the recorded evidence is sufficient for internal or external scrutiny.
+              </p>
+
+              <h2 id="why-this-matters">Why this matters</h2>
+              <p>
+                Each entity runs different systems, but the review pattern stays consistent. A shared structure reduces
+                ambiguity, improves comparability across entities, and gives escalation paths a clear trigger instead of
+                relying on instinct.
+              </p>
+              <ul>
+                <li>Surface weakening indicators before they become customer-visible incidents.</li>
+                <li>Keep accountability attached to named authority and provider owners.</li>
+                <li>Ensure the group handbook can compare evidence on the same basis across entities.</li>
+              </ul>
+
+              <h2 id="decision-model">Decision model</h2>
+              <p>
+                Reviewers classify every critical service using a simple three-state model: <strong>healthy</strong>,
+                <strong>watch</strong>, or <strong>escalate</strong>. The model works only if supporting evidence is no
+                older than the current review cycle.
+              </p>
+              <blockquote>
+                A review is incomplete when owners can describe a risk but cannot point to the latest proof.
+              </blockquote>
+
+              <h3 id="cadence">Weekly operational cadence</h3>
+              <p>
+                Teams collect weekly operational signals so the monthly review can stay decision-focused. The monthly
+                pack should summarize trend changes rather than replay every event in chronological order.
+              </p>
+              <pre><code>Inputs required before the review
+- service health snapshot
+- major incident summary
+- open control remediation items
+- evidence links for changed controls</code></pre>
+
+              <h2 id="thresholds">Escalation signals</h2>
+              <p>
+                Escalation is required when service degradation persists beyond the entity's tolerance window, when a
+                control has no valid owner, or when a material gap cannot be evidenced within the review cycle.
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Signal</th>
+                    <th>Threshold</th>
+                    <th>Required action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Critical service health</td>
+                    <td>Two consecutive weeks below target</td>
+                    <td>Escalate to entity leadership and open a remediation plan</td>
+                  </tr>
+                  <tr>
+                    <td>Control evidence age</td>
+                    <td>Older than the current review cycle</td>
+                    <td>Move the service to watch until evidence is refreshed</td>
+                  </tr>
+                  <tr>
+                    <td>Owner coverage</td>
+                    <td>Authority or provider owner missing</td>
+                    <td>Block closure and assign named ownership</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h3 id="evidence-pack">Quarterly evidence pack</h3>
+              <p>
+                The monthly review should reference live evidence, while the quarterly pack preserves the exact basis for
+                the decisions taken during the period. This distinction keeps the working review lightweight without
+                losing auditability.
+              </p>
+
+              <h2 id="controls">Control coverage and mapping</h2>
+              <p>
+                Every service reviewed must map to the minimum control set defined by the group. Missing mappings are
+                tracked openly and carried until the next review with a named remediation owner.
+              </p>
+              <ol>
+                <li>Confirm the service inventory is complete.</li>
+                <li>Verify the mapped control set is still current.</li>
+                <li>Check that each control has recent evidence and a named owner.</li>
+                <li>Record deviations with remediation dates.</li>
+              </ol>
+
+              <h2 id="owners">Authority and provider owners</h2>
+              <p>
+                Authority owners decide acceptability. Provider owners decide delivery changes. The review fails when
+                one person tries to substitute for both roles without explicit delegation.
+              </p>
+            </article>
+
+            <aside class="eh-right-rail" aria-label="On this page and supporting links">
+              <section class="eh-rail-card eh-toc-card">
+                <div class="eh-rail-head">
+                  <h2>On this page</h2>
+                  <button type="button" class="eh-rail-toggle" data-toc-toggle aria-expanded="true">Hide</button>
+                </div>
+                <nav class="eh-toc" data-toc aria-label="Table of contents">
+                  <ol class="eh-toc-list" data-toc-list></ol>
+                </nav>
+              </section>
+
+              <section class="eh-rail-card">
+                <h2>Related pages</h2>
+                <ul class="eh-rail-links" data-related-list>
+                  <li><a href="#cadence">Weekly operational cadence</a></li>
+                  <li><a href="#controls">Control coverage and mapping</a></li>
+                  <li><a href="#owners">Authority and provider owners</a></li>
+                </ul>
+              </section>
+
+              <section class="eh-rail-card" data-recents-panel>
+                <div class="eh-rail-head">
+                  <h2>Recently viewed</h2>
+                  <button type="button" class="eh-ghost-btn" data-recents-clear>Clear</button>
+                </div>
+                <ul class="eh-rail-links" data-recents-list></ul>
+              </section>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <nav class="eh-mobile-nav" data-mobile-nav aria-label="Mobile navigation">
+        <button type="button" data-action="menu">Menu</button>
+        <button type="button" data-action="search">Search</button>
+        <button type="button" data-action="domains">Domains</button>
+        <button type="button" data-action="recent">Recent</button>
+      </nav>
+    </div>
+
+    <script defer src="/theme/js/mobile-nav.js"></script>
+    <script defer src="/theme/js/toc.js"></script>
+    <script defer src="/theme/js/recents.js"></script>
+  </body>
+</html>

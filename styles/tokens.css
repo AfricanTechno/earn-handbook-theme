@@ -1,26 +1,34 @@
 :root {
   color-scheme: light dark;
 
-  --eh-color-bg: #f3f6fa;
-  --eh-color-bg-alt: #e8eef5;
-  --eh-color-surface: #ffffff;
-  --eh-color-surface-muted: #f7f9fc;
-  --eh-color-border: #c7d1dd;
-  --eh-color-border-strong: #95a6b8;
-  --eh-color-text: #0f1f2f;
-  --eh-color-text-muted: #32485d;
-  --eh-color-accent: #0f6f5d;
-  --eh-color-accent-strong: #0a5648;
-  --eh-color-accent-soft: #d9efe9;
-  --eh-color-focus: #145fc0;
+  --eh-color-bg: #edf4ef;
+  --eh-color-bg-alt: #dfe8e1;
+  --eh-color-bg-deep: #163c37;
+  --eh-color-surface: rgba(255, 255, 255, 0.92);
+  --eh-color-surface-strong: #ffffff;
+  --eh-color-surface-muted: #f4f7f3;
+  --eh-color-surface-tint: #ecf4f1;
+  --eh-color-border: #c5d2c8;
+  --eh-color-border-strong: #7e958a;
+  --eh-color-text: #182825;
+  --eh-color-text-muted: #52635f;
+  --eh-color-accent: #0d6a5a;
+  --eh-color-accent-strong: #0a4f43;
+  --eh-color-accent-soft: #dcede6;
+  --eh-color-accent-warm: #b36d2f;
+  --eh-color-focus: #0e5db6;
+  --eh-color-focus-soft: rgba(14, 93, 182, 0.22);
   --eh-color-danger: #a3283a;
 
-  --eh-shadow-1: 0 8px 24px rgba(7, 18, 34, 0.08);
-  --eh-shadow-2: 0 16px 38px rgba(7, 18, 34, 0.12);
+  --eh-shadow-1: 0 14px 40px rgba(10, 28, 26, 0.08);
+  --eh-shadow-2: 0 22px 60px rgba(10, 28, 26, 0.12);
+  --eh-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.72);
 
-  --eh-radius-sm: 8px;
-  --eh-radius-md: 12px;
-  --eh-radius-lg: 18px;
+  --eh-radius-xs: 6px;
+  --eh-radius-sm: 10px;
+  --eh-radius-md: 16px;
+  --eh-radius-lg: 24px;
+  --eh-radius-xl: 32px;
 
   --eh-space-1: 4px;
   --eh-space-2: 8px;
@@ -30,9 +38,11 @@
   --eh-space-6: 24px;
   --eh-space-8: 32px;
   --eh-space-10: 40px;
+  --eh-space-12: 48px;
+  --eh-space-14: 56px;
 
   --eh-font-body: "Atkinson Hyperlegible Next", "Avenir Next", "Segoe UI", sans-serif;
-  --eh-font-heading: "DM Serif Display", "Fraunces", Georgia, serif;
+  --eh-font-heading: "Fraunces", "DM Serif Display", Georgia, serif;
   --eh-font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 
   --eh-font-size-xs: 0.8125rem;
@@ -44,15 +54,19 @@
   --eh-font-size-3xl: 1.875rem;
   --eh-font-size-4xl: 2.25rem;
 
-  --eh-line-tight: 1.25;
+  --eh-line-tight: 1.2;
   --eh-line-normal: 1.5;
-  --eh-line-relaxed: 1.65;
+  --eh-line-relaxed: 1.7;
 
+  --eh-shell-max: 1560px;
   --eh-sidebar-width: 320px;
-  --eh-right-rail-width: 300px;
-  --eh-reader-max: 78ch;
+  --eh-right-rail-width: 310px;
+  --eh-reader-max: 72ch;
   --eh-touch-target: 48px;
   --eh-scroll-margin: 90px;
+
+  --eh-transition-fast: 160ms ease;
+  --eh-transition-base: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {

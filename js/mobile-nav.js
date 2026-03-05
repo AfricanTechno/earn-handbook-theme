@@ -16,14 +16,29 @@
       return;
     }
 
+    function syncSidebarState() {
+      if (isDesktop()) {
+        body.classList.remove("eh-sidebar-open");
+        toggle.setAttribute("aria-expanded", "false");
+        sidebar.setAttribute("aria-hidden", "false");
+        overlay.setAttribute("aria-hidden", "true");
+        return;
+      }
+
+      var isOpen = body.classList.contains("eh-sidebar-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      sidebar.setAttribute("aria-hidden", String(!isOpen));
+      overlay.setAttribute("aria-hidden", String(!isOpen));
+    }
+
     function openSidebar() {
       body.classList.add("eh-sidebar-open");
-      toggle.setAttribute("aria-expanded", "true");
+      syncSidebarState();
     }
 
     function closeSidebar() {
       body.classList.remove("eh-sidebar-open");
-      toggle.setAttribute("aria-expanded", "false");
+      syncSidebarState();
     }
 
     function toggleSidebar() {
@@ -43,11 +58,7 @@
       }
     });
 
-    window.addEventListener("resize", function () {
-      if (isDesktop()) {
-        closeSidebar();
-      }
-    });
+    window.addEventListener("resize", syncSidebarState);
 
     mobileNav.addEventListener("click", function (event) {
       var button = event.target.closest("button[data-action]");
@@ -99,6 +110,8 @@
         closeSidebar();
       }
     });
+
+    syncSidebarState();
   }
 
   window.EarnThemeMobileNav = {

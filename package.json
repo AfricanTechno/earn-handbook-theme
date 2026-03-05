@@ -1,0 +1,13 @@
+{
+  "name": "earn-handbook-theme",
+  "private": true,
+  "scripts": {
+    "preview": "node scripts/serve-preview.mjs",
+    "validate": "bash scripts/validate-theme.sh",
+    "test:browser": "playwright test",
+    "test": "npm run validate && npm run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

@@ -62,6 +62,7 @@
 
       if (!items.length) {
         var empty = document.createElement("li");
+        empty.className = "is-empty";
         empty.textContent = "No recently viewed pages yet.";
         list.appendChild(empty);
         return;
@@ -69,15 +70,18 @@
 
       items.forEach(function (item) {
         var li = document.createElement("li");
+        li.className = "eh-recent-item";
+
         var link = document.createElement("a");
+        link.className = "eh-recent-link";
         link.href = item.url;
         link.textContent = item.title;
         li.appendChild(link);
 
         if (item.summary) {
           var hint = document.createElement("small");
+          hint.className = "eh-recent-summary";
           hint.textContent = item.summary;
-          hint.style.display = "block";
           li.appendChild(hint);
         }
 

@@ -34,6 +34,14 @@ earn-handbook-theme/
     toc.js
     recents.js
     mobile-nav.js
+  preview/
+    index.html
+  scripts/
+    serve-preview.mjs
+  tests/
+    theme.spec.js
+  playwright.config.js
+  package.json
   README.md
 ```
 
@@ -211,3 +219,40 @@ git -C web/theme checkout origin/main
 
 - base navigation and reading remain usable without JS
 - JS enhances TOC highlighting, recent pages, and mobile drawer behavior
+
+## Local Preview
+
+Use the included preview fixture to inspect the shared theme without a consumer repo:
+
+```bash
+npm install
+npm run preview
+```
+
+The preview intentionally exercises:
+
+- long navigation lists
+- summary metadata cards
+- TOC generation
+- related links and recents
+- code blocks, tables, lists, and long-form copy
+
+## Browser Smoke Test
+
+The repo includes a Playwright smoke test for the most common responsive targets:
+
+- iPhone Safari shell
+- iPad Safari shell
+- Android Chrome shell
+- Windows desktop Chrome shell
+- Windows desktop Firefox shell
+
+Run:
+
+```bash
+npm install
+npx playwright install chromium firefox webkit
+npm test
+```
+
+The test serves the preview fixture locally, verifies the main theme regions render, checks that the TOC and recents initialize, and fails if the page introduces horizontal overflow or runtime errors.
