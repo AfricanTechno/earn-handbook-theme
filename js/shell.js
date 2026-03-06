@@ -11,8 +11,8 @@
   const DRAWER_BREAKPOINT = 1100;
   const DRAWER_TRANSITION_MS = prefersReducedMotion ? 1 : 220;
   const SEARCH_RENDER_DEBOUNCE_MS = prefersReducedMotion ? 0 : 120;
-  const NAV_INDEX_ENDPOINTS = ["/data/nav-index.json", "/nav-index.json", "/data/tree.json", "/api/tree"];
-  const SEARCH_INDEX_ENDPOINTS = ["/data/search-index.json", "/search-index.json"];
+  const NAV_INDEX_ENDPOINTS = ["/data/nav-index.json", "/api/tree"];
+  const SEARCH_INDEX_ENDPOINTS = ["/data/search-index.json"];
   const SYSTEMS = [
     {
       id: "earnos",
@@ -331,7 +331,7 @@
     if (!block) {
       block = document.createElement("section");
       block.className = "shell-sites-compact";
-      block.innerHTML = '<h3 class="shell-compact-title">All EARN sites</h3><div class="shell-sites-list"></div>';
+      block.innerHTML = '<h3 class="shell-compact-title">EARN handbooks</h3><div class="shell-sites-list"></div>';
 
       const anchors = [...sitesPanel.querySelectorAll(".shell-field-site, .system-jump-wrap")];
       const afterNode = anchors.length ? anchors[anchors.length - 1] : sitesPanel.querySelector(":scope > h2, :scope > .systems-head");
@@ -360,7 +360,7 @@
         `<span class="shell-site-entry-label">${system.label}</span>` +
         `<span class="shell-site-entry-title">${system.title}</span>` +
         `</span>` +
-        `<span class="shell-site-entry-meta">${system.id === activeSystemId ? "Current" : "Open"}</span>`;
+        `<span class="shell-site-entry-meta">${system.id === activeSystemId ? "Current handbook" : "Open handbook"}</span>`;
       list.appendChild(button);
     }
   }
@@ -372,6 +372,8 @@
 
     const brandPanel = sidebar.querySelector(".brand-panel");
     const searchPanel = ensurePanel("panel-search", "search-panel");
+    const starterPanel = ensurePanel("panel-starter", "onboarding-panel", "Start here");
+    const leadershipPanel = ensurePanel("panel-leadership", "leadership-panel", "Leadership essentials");
     let topicsPanel =
       document.getElementById("panel-topics") ||
       document.getElementById("panel-domains") ||
@@ -385,7 +387,7 @@
     if (docsPanel && docsPanel.id !== "panel-docs") {
       docsPanel.id = "panel-docs";
     }
-    docsPanel = ensurePanel("panel-docs", "docs-panel", "Document tree");
+    docsPanel = ensurePanel("panel-docs", "docs-panel", "All documents");
 
     let recentsPanel =
       document.getElementById("panel-recents") ||
@@ -400,7 +402,7 @@
     const sitesPanel = ensurePanel(
       "panel-sites",
       existingSitesPanel ? existingSitesPanel.className.replace(/\bpanel\b/g, "").trim() : "systems-panel",
-      "Other EARN sites"
+      "Related handbooks"
     );
 
     const domainSwitch = document.getElementById("domain-switch") || document.getElementById("domain-switcher");
@@ -436,7 +438,7 @@
         sitesPanel,
         "shell-field shell-field-site",
         "switcher-label",
-        "Open a site"
+        "Open a handbook"
       );
     }
 
@@ -447,7 +449,7 @@
         sitesPanel,
         "system-jump-wrap",
         "switcher-label",
-        "Open a site"
+        "Open a handbook"
       );
     }
 
@@ -460,6 +462,8 @@
       }
     }
 
+    assignPanelMetadata(starterPanel, "starter");
+    assignPanelMetadata(leadershipPanel, "leadership");
     assignPanelMetadata(brandPanel, "brand");
     assignPanelMetadata(topicsPanel, "topics");
     assignPanelMetadata(docsPanel, "docs");
@@ -481,7 +485,7 @@
       }
     }
 
-    reorderPanels([brandPanel, topicsPanel, docsPanel, recentsPanel, sitesPanel, searchPanel]);
+    reorderPanels([brandPanel, searchPanel, starterPanel, leadershipPanel, topicsPanel, recentsPanel, docsPanel, sitesPanel]);
 
     searchPanel.dataset.utilityPanel = "search";
     sitesPanel.dataset.utilityPanel = "sites";
@@ -654,7 +658,7 @@
       entry.classList.toggle("current", isCurrent);
       const meta = entry.querySelector(".shell-site-entry-meta");
       if (meta) {
-        meta.textContent = isCurrent ? "Current" : "Open";
+        meta.textContent = isCurrent ? "Current handbook" : "Open handbook";
       }
     }
   }
@@ -672,19 +676,19 @@
       `<section class="utility-sheet" role="dialog" aria-modal="true" aria-labelledby="utility-sheet-title">` +
       `<div class="utility-sheet-head">` +
       `<div class="utility-sheet-heading">` +
-      `<p class="utility-sheet-kicker">Navigator</p>` +
+      `<p class="utility-sheet-kicker">Handbook</p>` +
       `<h2 id="utility-sheet-title">Search</h2>` +
       `</div>` +
       `<button class="utility-close" type="button">Close</button>` +
       `</div>` +
       `<div class="utility-search-panel" hidden>` +
-      `<label class="utility-search-label" for="utility-search-input">Find a document</label>` +
-      `<input id="utility-search-input" class="utility-search-input" type="search" placeholder="Search documents, topics, and sites" autocomplete="off" />` +
+      `<label class="utility-search-label" for="utility-search-input">Find a handbook entry</label>` +
+      `<input id="utility-search-input" class="utility-search-input" type="search" placeholder="Search handbook entries, topics, and related handbooks" autocomplete="off" />` +
       `<p class="utility-search-meta">Press Escape to close.</p>` +
       `<div class="utility-search-results"></div>` +
       `</div>` +
       `<div class="utility-sites-panel" hidden>` +
-      `<p class="utility-search-meta">Jump to any EARN site from here.</p>` +
+      `<p class="utility-search-meta">Browse related EARN handbooks from here.</p>` +
       `<div class="utility-sites-results"></div>` +
       `</div>` +
       `</section>`;
@@ -765,7 +769,7 @@
     const searchMode = mode === "search";
     shellState.searchPanel.hidden = !searchMode;
     shellState.sitesPanel.hidden = searchMode;
-    shellState.titleNode.textContent = searchMode ? "Search" : "Other EARN sites";
+    shellState.titleNode.textContent = searchMode ? "Search" : "Related handbooks";
 
     if (searchMode) {
       shellState.searchField.value = "";
@@ -839,6 +843,12 @@
         const canonicalPath = String(entry.canonical_path || "").trim();
         const navWeightValue = Number(entry.nav_weight ?? entry.navWeight);
         const navWeight = Number.isFinite(navWeightValue) ? navWeightValue : 999;
+        const audience = String(entry.audience || "both").trim().toLowerCase() || "both";
+        const surface = String(entry.surface || "handbook").trim().toLowerCase() || "handbook";
+        const featured = Boolean(entry.featured);
+        const owner = String(entry.owner || "").trim();
+        const readMinutesValue = Number(entry.read_minutes ?? entry.estimated_read_minutes ?? entry.estimatedReadMinutes);
+        const readMinutes = Number.isFinite(readMinutesValue) ? readMinutesValue : null;
 
         return {
           path: pathValue,
@@ -847,9 +857,15 @@
           domain,
           canonicalPath,
           navWeight,
-          searchText: normalizeSearchText(`${title} ${summary} ${domain} ${pathValue}`)
+          audience,
+          surface,
+          featured,
+          owner,
+          readMinutes,
+          searchText: normalizeSearchText(`${title} ${summary} ${domain} ${pathValue} ${owner}`)
         };
-      });
+      })
+      .filter((entry) => entry.surface !== "admin");
   }
 
   function normalizeSearchPayload(payload) {
@@ -868,9 +884,15 @@
             title: String(entry.title || "").trim(),
             summary: String(entry.summary || "").trim(),
             canonicalPath: String(entry.canonical_path || "").trim(),
+            audience: String(entry.audience || "both").trim().toLowerCase() || "both",
+            surface: String(entry.surface || "handbook").trim().toLowerCase() || "handbook",
+            featured: Boolean(entry.featured),
+            owner: String(entry.owner || "").trim(),
+            readMinutes: Number(entry.read_minutes ?? entry.estimated_read_minutes ?? entry.estimatedReadMinutes),
             text: String(entry.search_text || entry.text || "").trim()
           }
         ])
+        .filter(([, entry]) => entry.surface !== "admin")
     );
   }
 
@@ -962,7 +984,7 @@
           const nextSummary = details.summary || doc.summary;
           const nextCanonicalPath = details.canonicalPath || doc.canonicalPath;
           const nextText = normalizeSearchText(
-            `${nextTitle} ${nextSummary} ${doc.domain} ${doc.path} ${details.text || ""}`
+            `${nextTitle} ${nextSummary} ${doc.domain} ${doc.path} ${details.owner || ""} ${details.text || ""}`
           );
 
           return {
@@ -970,9 +992,15 @@
             title: nextTitle,
             summary: nextSummary,
             canonicalPath: nextCanonicalPath,
+            audience: details.audience || doc.audience,
+            surface: details.surface || doc.surface,
+            featured: details.featured ?? doc.featured,
+            owner: details.owner || doc.owner,
+            readMinutes: Number.isFinite(details.readMinutes) ? details.readMinutes : doc.readMinutes,
             searchText: nextText || doc.searchText
           };
         })
+        .filter((doc) => doc.surface !== "admin")
         .sort((left, right) => left.navWeight - right.navWeight || left.path.localeCompare(right.path));
 
       shellState.docsByPath = new Map(shellState.docs.map((doc) => [doc.path, doc]));
@@ -1207,9 +1235,9 @@
     button.innerHTML =
       `<span class="utility-result-head">` +
       `<span class="utility-result-label">${topic.label}</span>` +
-      `<span class="utility-result-kind">${topic.count} docs</span>` +
+      `<span class="utility-result-kind">${topic.count} entries</span>` +
       `</span>` +
-      `<span class="utility-result-meta">Filter the document tree to this topic.</span>`;
+      `<span class="utility-result-meta">Filter the handbook to this topic.</span>`;
     return button;
   }
 
@@ -1221,7 +1249,7 @@
     button.innerHTML =
       `<span class="utility-result-head">` +
       `<span class="utility-result-label">${system.label}</span>` +
-      `<span class="utility-result-kind">${system.id === currentSystemId() ? "Current" : "Site"}</span>` +
+      `<span class="utility-result-kind">${system.id === currentSystemId() ? "Current handbook" : "Handbook"}</span>` +
       `</span>` +
       `<span class="utility-result-meta">${system.description}</span>`;
     return button;
@@ -1256,7 +1284,9 @@
     const rawQuery = String(query || "");
     const normalizedQuery = normalizeSearchText(rawQuery);
 
-    shellState.searchMeta.textContent = normalizedQuery ? "Searching documents, topics, and sites." : "Recent documents, topics, and sites.";
+    shellState.searchMeta.textContent = normalizedQuery
+      ? "Searching handbook entries, topics, and related handbooks."
+      : "Recent handbook entries, topics, and related handbooks.";
     shellState.searchResults.innerHTML = '<p class="utility-loading">Loading…</p>';
 
     try {
@@ -1273,11 +1303,11 @@
 
       if (!normalizedQuery) {
         if (recentDocs.length) {
-          groups.push({ title: "Recent documents", items: recentDocs.slice(0, 6), renderer: createSearchDocButton });
+          groups.push({ title: "Recent", items: recentDocs.slice(0, 6), renderer: createSearchDocButton });
         }
 
         groups.push({ title: "Topics", items: topics.slice(0, 6), renderer: createSearchTopicButton });
-        groups.push({ title: "Sites", items: systems, renderer: createSearchSystemButton });
+        groups.push({ title: "Related handbooks", items: systems, renderer: createSearchSystemButton });
         renderSearchGroups(groups);
         return;
       }
@@ -1298,11 +1328,11 @@
       });
 
       if (docMatches.length) {
-        groups.push({ title: "Documents", items: docMatches, renderer: createSearchDocButton });
+        groups.push({ title: "Handbook entries", items: docMatches, renderer: createSearchDocButton });
       }
 
       if (recentMatches.length) {
-        groups.push({ title: "Recent documents", items: recentMatches.slice(0, 5), renderer: createSearchDocButton });
+        groups.push({ title: "Recent", items: recentMatches.slice(0, 5), renderer: createSearchDocButton });
       }
 
       if (topicMatches.length) {
@@ -1310,7 +1340,7 @@
       }
 
       if (systemMatches.length) {
-        groups.push({ title: "Sites", items: systemMatches, renderer: createSearchSystemButton });
+        groups.push({ title: "Related handbooks", items: systemMatches, renderer: createSearchSystemButton });
       }
 
       renderSearchGroups(groups);
@@ -1333,7 +1363,7 @@
       `<span class="utility-site-item-label">${system.label}</span>` +
       `<span class="utility-site-item-title">${system.title}</span>` +
       `</span>` +
-      `<span class="utility-site-item-meta">${system.id === currentSystemId() ? "Current" : "Open"}</span>`;
+      `<span class="utility-site-item-meta">${system.id === currentSystemId() ? "Current handbook" : "Open handbook"}</span>`;
     return button;
   }
 
@@ -1343,7 +1373,7 @@
 
     const group = document.createElement("section");
     group.className = "utility-group";
-    const heading = createHeading("h3", "All sites");
+    const heading = createHeading("h3", "Related handbooks");
     heading.className = "utility-group-title";
     group.appendChild(heading);
     group.appendChild(createResultList(SYSTEMS, createSitesPanelButton));

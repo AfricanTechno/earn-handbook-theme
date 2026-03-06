@@ -49,10 +49,10 @@
             </div>
           </form>
 
-          <section class="eh-header-actions eh-header-panel" aria-label="Quick actions">
-            <p class="eh-header-actions-label">Quick actions</p>
+          <section class="eh-header-actions eh-header-panel" aria-label="Handbook utilities">
+            <p class="eh-header-actions-label">Handbook utilities</p>
             <div class="eh-header-actions-list">
-              <a class="eh-action-link" href="https://example.com/group">Open in Group Handbook</a>
+              <a class="eh-action-link" href="https://example.com/group">Group handbook</a>
               <a class="eh-action-link" href="https://example.com/logout">Logout</a>
             </div>
           </section>
@@ -68,8 +68,30 @@
       ></button>
 
       <aside class="eh-sidebar" id="eh-sidebar" data-sidebar aria-label="Handbook navigation">
+        <section class="eh-sidebar-block" data-starter-nav>
+          <h2>Start here</h2>
+          <nav aria-label="Start here">
+            <ul class="eh-nav-list" data-starter-list>
+              <li><a href="/preview/index.html" aria-current="page">Operational Resilience Review</a></li>
+              <li><a href="#cadence">Weekly operational cadence</a></li>
+              <li><a href="#thresholds">Incident thresholds and escalation</a></li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="eh-sidebar-block" data-leadership-nav>
+          <h2>Leadership essentials</h2>
+          <nav aria-label="Leadership essentials">
+            <ul class="eh-nav-list" data-leadership-list>
+              <li><a href="#thresholds">Incident thresholds and escalation</a></li>
+              <li><a href="#evidence-pack">Quarterly evidence pack</a></li>
+              <li><a href="#owners">Authority and provider owners</a></li>
+            </ul>
+          </nav>
+        </section>
+
         <section class="eh-sidebar-block" data-domain-nav>
-          <h2>Domains</h2>
+          <h2>Topics</h2>
           <nav aria-label="Domain navigation">
             <ul class="eh-nav-list" data-domain-list>
               <li><a href="#governance">Governance</a></li>
@@ -81,8 +103,8 @@
         </section>
 
         <section class="eh-sidebar-block">
-          <h2>All pages</h2>
-          <nav aria-label="All handbook pages">
+          <h2>All documents</h2>
+          <nav aria-label="All handbook documents">
             <ul class="eh-nav-list" data-doc-list>
               <li><a href="/preview/index.html" aria-current="page">Operational Resilience Review</a></li>
               <li><a href="#cadence">Weekly operational cadence</a></li>
@@ -235,7 +257,7 @@
               </p>
             </article>
 
-            <aside class="eh-right-rail" aria-label="On this page and supporting links">
+            <aside class="eh-right-rail" aria-label="On this page and supporting handbook links">
               <section class="eh-rail-card eh-toc-card">
                 <div class="eh-rail-head">
                   <h2>On this page</h2>
@@ -247,7 +269,7 @@
               </section>
 
               <section class="eh-rail-card">
-                <h2>Related pages</h2>
+                <h2>Related handbook entries</h2>
                 <ul class="eh-rail-links" data-related-list>
                   <li><a href="#cadence">Weekly operational cadence</a></li>
                   <li><a href="#controls">Control coverage and mapping</a></li>
@@ -270,7 +292,7 @@
       <nav class="eh-mobile-nav" data-mobile-nav aria-label="Mobile navigation">
         <button type="button" data-action="menu">Menu</button>
         <button type="button" data-action="search">Search</button>
-        <button type="button" data-action="domains">Domains</button>
+        <button type="button" data-action="domains">Topics</button>
         <button type="button" data-action="recent">Recent</button>
       </nav>
     </div>

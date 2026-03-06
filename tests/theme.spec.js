@@ -18,6 +18,13 @@ test('preview renders across responsive shells without overflow or script errors
   await expect(page.locator('.eh-header')).toBeVisible();
   await expect(page.locator('[data-doc-title]')).toHaveText('Operational Resilience Review');
   await expect(page.locator('[data-toc-list] li')).toHaveCount(7);
+  await expect(page.locator('[data-starter-nav] h2')).toHaveText('Start here');
+  await expect(page.locator('[data-leadership-nav] h2')).toHaveText('Leadership essentials');
+  await expect(page.locator('[data-domain-nav] h2')).toHaveText('Topics');
+  await expect(page.locator('body')).not.toContainText('Quick actions');
+  await expect(page.locator('body')).not.toContainText('Open in Group Handbook');
+  await expect(page.locator('body')).not.toContainText('All pages');
+  await expect(page.locator('body')).not.toContainText('Domains');
 
   const width = (page.viewportSize() || { width: 1440 }).width;
   const overflow = await page.evaluate(() => {
