@@ -829,6 +829,8 @@
   function normalizeDocsPayload(payload) {
     const entries = Array.isArray(payload && payload.docs)
       ? payload.docs
+      : Array.isArray(payload && payload.items)
+        ? payload.items
       : Array.isArray(payload && payload.files)
         ? payload.files.map((pathValue) => ({ path: pathValue }))
         : [];
@@ -871,6 +873,8 @@
   function normalizeSearchPayload(payload) {
     const entries = Array.isArray(payload && payload.documents)
       ? payload.documents
+      : Array.isArray(payload && payload.entries)
+        ? payload.entries
       : Array.isArray(payload && payload.docs)
         ? payload.docs
         : [];
@@ -889,7 +893,7 @@
             featured: Boolean(entry.featured),
             owner: String(entry.owner || "").trim(),
             readMinutes: Number(entry.read_minutes ?? entry.estimated_read_minutes ?? entry.estimatedReadMinutes),
-            text: String(entry.search_text || entry.text || "").trim()
+            text: String(entry.search_text || entry.text || entry.content || "").trim()
           }
         ])
         .filter(([, entry]) => entry.surface !== "admin")
