@@ -131,6 +131,12 @@
   padding: 0 var(--eh-space-3);
 }
 
+.eh-search-row input:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--eh-color-focus) 45%, transparent 55%);
+  outline-offset: 2px;
+  border-color: var(--eh-color-focus);
+}
+
 .eh-header-actions {
   display: flex;
   flex-wrap: wrap;
@@ -190,6 +196,11 @@
   background: var(--eh-color-accent-soft);
 }
 
+.eh-nav-list a[aria-current="page"] {
+  color: var(--eh-color-accent-strong);
+  font-weight: 700;
+}
+
 .eh-main {
   grid-area: main;
 }
@@ -221,6 +232,7 @@
 .eh-doc-summary {
   margin-top: var(--eh-space-3);
   border: 1px solid var(--eh-color-border);
+  border-left: 4px solid var(--eh-color-accent);
   border-radius: var(--eh-radius-md);
   background: var(--eh-color-surface-muted);
   padding: var(--eh-space-4);
@@ -303,6 +315,7 @@
 .eh-toc-list li {
   border-left: 2px solid var(--eh-color-border);
   padding-left: var(--eh-space-2);
+  transition: border-color 150ms ease;
 }
 
 .eh-toc-list li.level-3 {
@@ -312,6 +325,18 @@
 .eh-toc-list a.is-active {
   color: var(--eh-color-accent-strong);
   font-weight: 700;
+}
+
+.eh-toc-list li:has(a.is-active) {
+  border-left-color: var(--eh-color-accent);
+}
+
+.eh-rail-card:has([data-related-list]:empty) {
+  display: none;
+}
+
+.eh-right-rail [data-recents-panel]:has([data-recents-list]:empty) {
+  display: none;
 }
 
 .eh-mobile-nav {
