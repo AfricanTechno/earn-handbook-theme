@@ -6,6 +6,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  min-height: 100dvh;
 }
 
 body {
@@ -100,7 +101,7 @@ samp {
 .eh-doc-content h3,
 .eh-doc-content h4 {
   margin: var(--eh-space-6) 0 var(--eh-space-3);
-  scroll-margin-top: 90px;
+  scroll-margin-top: var(--eh-scroll-margin);
 }
 
 .eh-doc-content ul,
@@ -138,4 +139,9 @@ samp {
   text-align: left;
   border: 1px solid var(--eh-color-border);
   padding: var(--eh-space-2) var(--eh-space-3);
+}
+
+.eh-doc-content th {
+  background: var(--eh-color-surface-muted);
+  font-weight: 700;
 }
