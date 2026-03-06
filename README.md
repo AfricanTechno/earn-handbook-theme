@@ -30,10 +30,13 @@ earn-handbook-theme/
     tokens.css
     typography.css
     layout.css
+    shell.css
   js/
     toc.js
     recents.js
     mobile-nav.js
+    brand.js
+    shell.js
   preview/
     index.html
   scripts/
@@ -56,7 +59,7 @@ web/theme/
 Example:
 
 ```bash
-git submodule add git@github.com:AfricanTechno/earn-handbook-theme.git web/theme
+git submodule add https://github.com/AfricanTechno/earn-handbook-theme.git web/theme
 git submodule update --init --recursive
 ```
 
@@ -77,6 +80,12 @@ Each consumer repo should provide:
 - a local shell file such as `web/public/index.html`
 - build output wiring that copies `web/theme` into the published static output
 - local preview wiring that serves `/theme/*` from `web/theme`
+
+The reusable navigator shell now lives in the theme layer:
+
+- `styles/shell.css`
+- `js/brand.js`
+- `js/shell.js`
 
 Recommended branding/config payload:
 
@@ -104,10 +113,12 @@ Consumer templates must include:
 <script defer src="/theme/js/recents.js"></script>
 ```
 
-If the consumer repo uses a small branding loader, load that before the main app bundle:
+Load the shared shell assets from `/theme/*` before the repo app bundle:
 
 ```html
-<script defer src="/brand.js"></script>
+<link rel="stylesheet" href="/theme/styles/shell.css" />
+<script defer src="/theme/js/brand.js"></script>
+<script defer src="/theme/js/shell.js"></script>
 <script type="module" src="/app.js"></script>
 ```
 
