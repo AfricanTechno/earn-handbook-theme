@@ -12,12 +12,7 @@ This repo contains only reusable theme files:
 
 ## Current Consumers
 
-- `earnOS`
-- `atOS`
-- `agOS`
-- `aghOS`
-- `alpOS`
-- `ebsOS`
+This theme is used as a git submodule by internal handbook sites. Add your repo here when you adopt the theme.
 
 ## Repo Structure
 
