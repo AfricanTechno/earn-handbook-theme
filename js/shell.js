@@ -831,6 +831,8 @@
       ? payload.docs
       : Array.isArray(payload && payload.items)
         ? payload.items
+        : Array.isArray(payload && payload.documents)
+          ? payload.documents
       : Array.isArray(payload && payload.files)
         ? payload.files.map((pathValue) => ({ path: pathValue }))
         : [];
@@ -842,7 +844,7 @@
         const domain = String(entry.domain || (pathValue.includes("/") ? pathValue.split("/")[0] : "root"));
         const title = String(entry.title || "").trim();
         const summary = String(entry.summary || "").trim();
-        const canonicalPath = String(entry.canonical_path || "").trim();
+        const canonicalPath = String(entry.canonical_path || entry.canonicalPath || "").trim();
         const navWeightValue = Number(entry.nav_weight ?? entry.navWeight);
         const navWeight = Number.isFinite(navWeightValue) ? navWeightValue : 999;
         const audience = String(entry.audience || "both").trim().toLowerCase() || "both";
@@ -887,13 +889,13 @@
           {
             title: String(entry.title || "").trim(),
             summary: String(entry.summary || "").trim(),
-            canonicalPath: String(entry.canonical_path || "").trim(),
+            canonicalPath: String(entry.canonical_path || entry.canonicalPath || "").trim(),
             audience: String(entry.audience || "both").trim().toLowerCase() || "both",
             surface: String(entry.surface || "handbook").trim().toLowerCase() || "handbook",
             featured: Boolean(entry.featured),
             owner: String(entry.owner || "").trim(),
             readMinutes: Number(entry.read_minutes ?? entry.estimated_read_minutes ?? entry.estimatedReadMinutes),
-            text: String(entry.search_text || entry.text || entry.content || "").trim()
+            text: String(entry.search_text || entry.searchText || entry.text || entry.content || "").trim()
           }
         ])
         .filter(([, entry]) => entry.surface !== "admin")
