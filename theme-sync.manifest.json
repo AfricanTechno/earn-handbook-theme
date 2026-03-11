@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "include": [
+    ".github/workflows/theme-quality.yml",
+    ".gitignore",
+    "components/**",
+    "js/**",
+    "preview/index.html",
+    "scripts/serve-preview.mjs",
+    "scripts/validate-theme.sh",
+    "styles/**",
+    "tests/theme.spec.js",
+    "theme/**"
+  ],
+  "exclude": [
+    ".git/**",
+    "node_modules/**",
+    "test-results/**",
+    ".DS_Store",
+    "**/.DS_Store"
+  ],
+  "maintainerOnly": [
+    "README.md",
+    "package-lock.json",
+    "package.json",
+    "playwright.config.js",
+    "theme-sync.manifest.json",
+    "scripts/check-consumer-theme.mjs",
+    "scripts/sync-consumer-theme.mjs",
+    "scripts/theme-sync-lib.mjs"
+  ]
+}

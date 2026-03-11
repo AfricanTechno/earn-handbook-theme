@@ -1,5 +1,8 @@
 const { defineConfig } = require('@playwright/test');
 
+const port = Number(process.env.PORT || 4173);
+const baseURL = `http://127.0.0.1:${port}`;
+
 const windowsChromeUA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36';
 const windowsFirefoxUA =
@@ -21,14 +24,14 @@ module.exports = defineConfig({
   reporter: 'list',
   outputDir: 'test-results',
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL,
     trace: 'off',
     video: 'off',
     screenshot: 'only-on-failure'
   },
   webServer: {
-    command: 'node scripts/serve-preview.mjs',
-    url: 'http://127.0.0.1:4173/preview/index.html',
+    command: `PORT=${port} node scripts/serve-preview.mjs`,
+    url: `${baseURL}/preview/index.html`,
     reuseExistingServer: true,
     timeout: 120000
   },

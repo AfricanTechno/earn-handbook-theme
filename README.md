@@ -12,7 +12,7 @@ This repo contains only reusable theme files:
 
 ## Current Consumers
 
-This theme is used as a git submodule by internal handbook sites. Add your repo here when you adopt the theme.
+This theme is the source of truth for the checked-in `web/theme/` copies used by the internal handbook sites.
 
 ## Repo Structure
 
@@ -40,9 +40,13 @@ earn-handbook-theme/
   preview/
     index.html
   scripts/
+    check-consumer-theme.mjs
     serve-preview.mjs
+    sync-consumer-theme.mjs
+    theme-sync-lib.mjs
   tests/
     theme.spec.js
+  theme-sync.manifest.json
   playwright.config.js
   package.json
   README.md
@@ -50,31 +54,46 @@ earn-handbook-theme/
 
 ## Preferred Integration
 
-Consumer repos should mount this repo as a git submodule at:
+Consumer repos should vendor a checked-in copy of the managed payload at:
 
 ```text
 web/theme/
 ```
 
-Example:
+The source-of-truth repo stays in `earn-handbook-theme/`; consumer repos receive only the manifest-managed payload.
 
-```bash
-git submodule add https://github.com/AfricanTechno/earn-handbook-theme.git web/theme
-git submodule update --init --recursive
-```
+## Sync Manifest
 
-If a consumer repo already exists:
+The vendor payload is defined in [theme-sync.manifest.json](/Users/daliso/Developer/EARN_Group/earn-handbook-theme/theme-sync.manifest.json). The synced payload includes:
 
-```bash
-git submodule sync -- web/theme
-git submodule update --init --recursive
-```
+- `.gitignore`
+- `.github/workflows/theme-quality.yml`
+- `components/**`
+- `js/**`
+- `styles/**`
+- `theme/**`
+- `scripts/serve-preview.mjs`
+- `scripts/validate-theme.sh`
+- `tests/theme.spec.js`
+- `preview/index.html`
+
+The following paths are intentionally not vendor-synced to consumer repos:
+
+- `README.md`
+- `package.json`
+- `package-lock.json`
+- `playwright.config.js`
+- `theme-sync.manifest.json`
+- `scripts/check-consumer-theme.mjs`
+- `scripts/sync-consumer-theme.mjs`
+- `scripts/theme-sync-lib.mjs`
+- local runtime or cache output such as `.git/`, `node_modules/`, `test-results/`, and `.DS_Store`
 
 ## Consumer Requirements
 
 Each consumer repo should provide:
 
-- `web/theme/` mounted from this repo
+- `web/theme/` as a checked-in vendor copy from this repo
 - `web/handbook.config.json`
 - `web/public/overrides.css`
 - a local shell file such as `web/public/index.html`
@@ -173,7 +192,6 @@ Recommended publish step:
 ```text
 copy web/theme -> <publish-output>/theme
 copy web/handbook.config.json -> <publish-output>/handbook.config.json
-remove <publish-output>/theme/.git
 ```
 
 Recommended local dev routing:
@@ -202,19 +220,38 @@ Do not fork theme files just to change branding.
 
 ## Updating Consumers
 
-When this repo changes, update each consumer repo with:
+From this repo, sync a consumer theme copy with:
 
 ```bash
-git submodule update --remote web/theme
-git add web/theme
-git commit -m "Update shared handbook theme"
+npm run sync -- --target ../agOS/web/theme
 ```
 
-If the consumer has pinned submodule changes locally:
+Preview the same operation without changing the consumer repo:
 
 ```bash
-git -C web/theme fetch origin main
-git -C web/theme checkout origin/main
+npm run sync:dry-run -- --target ../agOS/web/theme
+```
+
+Verify a consumer copy matches the manifest-managed payload:
+
+```bash
+npm run check:consumer -- --target ../agOS/web/theme
+```
+
+After a real sync, commit the updated `web/theme` tree in the consumer repo in the normal way.
+
+## Local Validation
+
+Validate the source-of-truth theme repo and the manifest-managed payload with:
+
+```bash
+npm run validate
+```
+
+Override the preview port for browser smoke tests when `4173` is already in use:
+
+```bash
+PORT=4473 npm run test:browser
 ```
 
 ## Accessibility Defaults

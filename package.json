@@ -2,8 +2,13 @@
   "name": "earn-handbook-theme",
   "private": true,
   "scripts": {
+    "validate:structure": "bash scripts/validate-theme.sh",
+    "validate:payload": "node scripts/check-consumer-theme.mjs --target .",
+    "validate": "npm run validate:structure && npm run validate:payload",
     "preview": "node scripts/serve-preview.mjs",
-    "validate": "bash scripts/validate-theme.sh",
+    "sync": "node scripts/sync-consumer-theme.mjs",
+    "sync:dry-run": "node scripts/sync-consumer-theme.mjs --dry-run",
+    "check:consumer": "node scripts/check-consumer-theme.mjs",
     "test:browser": "playwright test",
     "test": "npm run validate && npm run test:browser"
   },
