@@ -1,6 +1,10 @@
 {
   "name": "earn-handbook-theme",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "npm@11.12.1",
   "scripts": {
     "preview": "node scripts/serve-preview.mjs",
     "validate": "bash scripts/validate-theme.sh",
